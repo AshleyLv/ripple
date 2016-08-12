@@ -72,6 +72,9 @@ body{
 	margin-top:5px;
 	 color: #2da1a9;
 }
+.class{
+	color:blue;
+}
  @keyframes ripple-ani {
 	0%{transform: scale(0);}
 	100% {transform: scale(7);}
@@ -97,7 +100,7 @@ body{
 	<div class="code">
 	<h4>Html</h4>
 		<code>
-			&lt;button class="rippleBtn"&gt;click me&lt;/button&gt;
+			&lt;button <class>class</class>="rippleBtn"&gt;click me&lt;/button&gt;
 		</code>
 	</div>
 	
@@ -105,7 +108,9 @@ body{
 		<h4>Javascript</h4>
 		<code>
 			$('.rippleBtn').ripple({<br/>
- 	 				&nbsp;&nbsp;color:'rgba(45, 161, 196, .3)'<br/>
+ 	 				&nbsp;&nbsp;color:'rgba(45, 161, 196, .3)', //custom ripple color<br/>
+ 	 				&nbsp;&nbsp;duration: 750, //custom ripple duration<br/>
+ 	 				&nbsp;&nbsp;timingFunction:'linear' //custom ripple timing function<br/>
  	 		});
 		</code>
 	</div>
