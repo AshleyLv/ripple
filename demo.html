@@ -3,122 +3,143 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Ripple</title>
-<!-- <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/> -->
 <link rel="stylesheet" type="text/css" href="css/ripple.css"/>
-<style type="text/css">
+<style type="text/css">	
+body{
+	font-family: Microsoft Yahei;
+	margin:0;
+	background-color: #333;
+	overflow: hidden;
+}
+/*******header*********/
+.demo-header{
+			height: 100px;
+		    color:#2da1a9;
+			padding: 50px;
+			background-color: #333;
+			
+		}
+.point{
+	width:30px;
+	height:30px;
+	position:absolute;
+	background:#fff;
+	opacity:.2;
+	border-radius: 50%;
+	transform: scale(0);
+	z-index:0;
 	
-	* {
-  box-sizing: border-box;
-  outline: none;
+	 animation:ripple-ani 5s infinite; 
 }
-
-body {
-  font-family: 'Open Sans';
-  font-size: 100%;
-  font-weight: 300;
-  line-height: 1.5em;
-  text-align: center;
+.demo-container{
+	text-align: center;
+	padding:20px;
 }
-
-h1 {
-  color: #666666;
-  font-size: 2rem;
-  line-height: 1.5em;
-  margin: 2em 0 2em 0;
-}
-
-.box {
-  margin: 1rem;
-  width: 18.75rem;
-}
-.box img {
-  width: 100%;
-}
-
 .btn {
   border: none;
+  position: relative;
   color: white;
   overflow: hidden;
-  margin: 1rem;
   padding: 0;
   text-transform: uppercase;
   width: 150px;
   height: 40px;
+  margin:5px 20px;
 }
-.btn.color-1 {
-  background-color: #426fc5;
-}
-.btn.color-2 {
-  background-color: #00897b;
-}
-.btn.color-3 {
-  background-color: #f6774f;
-}
-.btn.color-4 {
-  background-color: #e94043;
+.btn.colored {
+  background-color: #2da1a9;
 }
 
-.btn-border.color-1 {
+
+.btn-border.colored {
   background-color: transparent;
-  border: 2px solid #426fc5;
-  color: #426fc5;
-}
-.btn-border.color-2 {
-  background-color: transparent;
-  border: 2px solid #00897b;
-  color: #00897b;
-}
-.btn-border.color-3 {
-  background-color: transparent;
-  border: 2px solid #f6774f;
-  color: #f6774f;
-}
-.btn-border.color-4 {
-  background-color: transparent;
-  border: 2px solid #e94043;
-  color: #e94043;
+  border: 2px solid #2da1a9;
+  color: #2da1a9;
 }
 
-.btn-round {
-  border-radius: 10em;
+.code-container .code{
+	color: #fff;
+	margin:40px 150px;
+	padding:10px 30px;
+	background: #666;
+	opacity:.7;
+	z-index:5;
+	border-radius:5px;
+	font-size: 16px;
 }
-
-.material-design {
-  position: relative;
+.code-container .code h4{
+	font-size: 20px;
+	margin-top:5px;
+	 color: #2da1a9;
 }
-.material-design canvas {
-  opacity: 0.25;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.container {
-  align-content: center;
-  align-items: flex-start;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 auto;
-  max-width: 46rem;
-}
-
+ @keyframes ripple-ani {
+	0%{transform: scale(0);}
+	100% {transform: scale(7);}
+} 
 </style>
 </head>
 <body>
-	<button id="rippleBtn" data-rpcolor="rgba(0, 0, 0, 0.2)" class="btn color-1 material-design" style="overflow:hidden;">demo
+<section class="demo-header">
+		<h1>Ripple</h1>
+		<h4>A jQuery plugin to implement material design button ^O^</h4>
+	</section>
+	
+<section class="demo-container">
+	<button id="rippleBtn" class="btn colored" style="overflow:hidden;">click me
 	
 	</button>
-	<button id="rippleBtn1" data-rpcolor="rgba(66,111, 197, 0.2)" class="btn btn-border color-1 material-design" style="overflow:hidden;">demo
+	<button id="rippleBtn1" class="btn btn-border colored" style="overflow:hidden;">click me
 	
 	</button>
 	
+</section>
+<section class="code-container">
+	<div class="code">
+	<h4>Html</h4>
+		<code>
+			&lt;button class="rippleBtn"&gt;click me&lt;/button&gt;
+		</code>
+	</div>
+	
+	<div class="code">
+		<h4>Javascript</h4>
+		<code>
+			$('.rippleBtn').ripple({<br/>
+ 	 				&nbsp;&nbsp;color:'rgba(45, 161, 196, .3)'<br/>
+ 	 		});
+		</code>
+	</div>
+	
+</section>
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="js/ripple.js"></script>
 	<script type="text/javascript">
-			 $('#rippleBtn').ripple({}); 
- 			 $('#rippleBtn1').ripple({}); 
+			
+ 			jQuery(function($) {
+ 				var i;
+ 				for(i=7;i>0;i--){
+ 					var point = document.createElement('div');
+ 					point.className = 'point';
+ 					point.style.left = Math.random()*100 +'%';
+ 					point.style.top = Math.random()*100 +'%';
+ 					$('.demo-header').append(point);
+ 				}
+ 				setInterval(function(){
+ 					
+ 					for(i=$('.point').length;i>0;i--){
+ 						$($('.point')[i-1]).css('left',Math.random()*100 +'%');
+ 	 					$($('.point')[i-1]).css('top',Math.random()*100 +'%');
+ 					}
+ 				},5000);
+ 				
+				
+ 				 $('#rippleBtn').ripple({
+ 					 
+ 				 }); 
+ 	 			 $('#rippleBtn1').ripple({
+ 	 				color:'rgba(45, 161, 196, .2)'
+ 	 			 }); 
+ 			});
 	</script>
 </body>
 </html>
