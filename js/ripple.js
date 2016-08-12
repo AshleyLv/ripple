@@ -2,61 +2,64 @@
  * 
  */
 ;
-(function($) {
+(function($, window, document, undefined){
 	var options;
-	var methods = {
-		init : function(settings) {
-			options = $.extend(true, {}, $.fn.ripple.defaults, settings);
-			this._createRippleLayer(options);
+	function Ripple(element, options){
+		this.element = $(element);
+		this.options = $.extend({}, defaults, options);
+		this.init();
+	}
+	Ripple.prototype = {
+		init : function() {
+			this._createRippleLayer(this.options);
 
 		},
 		_createRippleLayer : function(options) {
-			element.css({
+			this.element.css({
 				overflow : 'hidden'
 			});
-			var ripple = document.createElement('span');
-			$(ripple).attr('class', 'ripple');
-			maxlength = Math.max(element.outerWidth(), element.outerHeight());
-			$(ripple).css({
+			this.ripple = document.createElement('span');
+			$(this.ripple).attr('class', 'ripple');
+			maxlength = Math.max(this.element.outerWidth(), this.element.outerHeight());
+			$(this.ripple).css({
 				height : maxlength,
 				width : maxlength
 			});
-			element.append(ripple);
-			element.bind('click', ripple, methods.activeRipple);
+			this.element.append(this.ripple);
+			this.element.bind('click', this, this.activeRipple);
 
 		},
 		activeRipple : function(event) {
 			event.stopPropagation();
-			var ripple = event.data;
-			var rippleWidth = ripple.style.width;
-			var rippleHeight = ripple.style.height;
+			var self = event.data;
+			var rippleWidth = self.ripple.style.width;
+			var rippleHeight = self.ripple.style.height;
 			var x = event.pageX - $(this).offset().left
 					- rippleWidth.substr(0, rippleWidth.length - 2) / 2;
 			var y = event.pageY - $(this).offset().top
 					- rippleHeight.substr(0, rippleHeight.length - 2) / 2;
-			$(ripple).css({
+			$(self.ripple).css({
 				top : y + "px",
 				left : x + "px",
-				background : $(this).attr('data-rpcolor'),
-				animationDuration : options.duration / 1000 + 's',
-				animationTimingFunction : options.timingFunction
+				background : self.options.color,
+				animationDuration : self.options.duration / 1000 + 's',
+				animationTimingFunction : self.options.timingFunction
 			});
-			$(ripple).addClass('ripple-active');
+			$(self.ripple).addClass('ripple-active');
 			setTimeout(function() {
-				$(ripple).removeClass('ripple-active');
-			}, options.duration);
+				$(self.ripple).removeClass('ripple-active');
+			}, self.options.duration);
 		}
 
 	}
-	$.fn.ripple = function(settings) {
-		element = this;
-		methods.init(settings);
+	$.fn.ripple = function(options) {
+		new Ripple(this,options);
 	};
 	
-	$.fn.ripple.defaults = {
+	var defaults = {
 		duration : 750,
 		color : 'rgba(255, 255, 255, 0.5)',
 		timingFunction : 'linear'
 	};
 
-})(jQuery);
+})(window.jQuery, window, document);;
