@@ -3,7 +3,11 @@
  */
 ;
 (function($, window, document, undefined){
-	var options;
+	var defaults = {
+			duration : 750,
+			color : 'rgba(255, 255, 255, 0.5)',
+			timingFunction : 'linear'
+		};
 	function Ripple(element, options){
 		this.element = $(element);
 		this.options = $.extend({}, defaults, options);
@@ -56,10 +60,6 @@
 		new Ripple(this,options);
 	};
 	
-	var defaults = {
-		duration : 750,
-		color : 'rgba(255, 255, 255, 0.5)',
-		timingFunction : 'linear'
-	};
+	
 
 })(window.jQuery, window, document);;
