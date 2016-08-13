@@ -72,19 +72,35 @@ body{
 	margin-top:5px;
 	 color: #2da1a9;
 }
-.class{
-	color:blue;
+class{
+	color:#00ffb1;
+}
+dollar{
+	color:#e8760e;
+}
+el{
+	color:#e80ec0;
+}
+jskeywords{
+	color:#2dd5e0;
+}
+jsvalues{
+	color:#e6da1f;
+}
+.download{
+	color:#2da1a9;
 }
  @keyframes ripple-ani {
 	0%{transform: scale(0);}
 	100% {transform: scale(7);}
 } 
+
 </style>
 </head>
 <body>
 <section class="demo-header">
 		<h1>Ripple</h1>
-		<h4>A jQuery plugin to implement material design button ^O^</h4>
+		<h4>Hey, this is a jQuery plugin, which is used to decorate element with ripple effect. ^O^</h4>
 	</section>
 	
 <section class="demo-container">
@@ -100,20 +116,24 @@ body{
 	<div class="code">
 	<h4>Html</h4>
 		<code>
-			&lt;button <class>class</class>="rippleBtn"&gt;click me&lt;/button&gt;
+			&lt;<el>button</el> <class>class</class>="rippleBtn"&gt;click me&lt;/<el>button</el>&gt;
 		</code>
 	</div>
 	
 	<div class="code">
 		<h4>Javascript</h4>
 		<code>
-			$('.rippleBtn').ripple({<br/>
- 	 				&nbsp;&nbsp;color:'rgba(45, 161, 196, .3)', //custom ripple color<br/>
- 	 				&nbsp;&nbsp;duration: 750, //custom ripple duration<br/>
- 	 				&nbsp;&nbsp;timingFunction:'linear' //custom ripple timing function<br/>
+			<dollar>$</dollar>('.rippleBtn').<jskeywords>ripple</jskeywords>({<br/>
+ 	 				&nbsp;&nbsp;color:<jsvalues>'rgba(45, 161, 196, .3)'</jsvalues> //custom ripple color<br/>
+ 	 				&nbsp;&nbsp;duration: <jsvalues>750</jsvalues>, //custom ripple duration<br/>
+ 	 				&nbsp;&nbsp;timingFunction:<jsvalues>'linear'</jsvalues> //custom ripple timing function<br/>
  	 		});
 		</code>
 	</div>
+	
+</section>
+<section style="text-align:center">
+	<a class="download" href="https://github.com/AshleyLv/ripple" target="_blank">Download</a>
 	
 </section>
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -144,6 +164,9 @@ body{
  	 			 $('#rippleBtn1').ripple({
  	 				color:'rgba(45, 161, 196, .2)'
  	 			 }); 
+ 	 			 $('#downloadBtn').ripple({
+ 					 
+ 				 }); 
  			});
 	</script>
 </body>
